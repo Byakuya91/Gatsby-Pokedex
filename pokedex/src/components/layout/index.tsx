@@ -2,7 +2,7 @@ import * as React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import { ThemeProvider } from "styled-components"
 
-import Header from "../header"
+import Header from "../Header"
 import { Main } from "./styles"
 import { defaultTheme } from "../../styles"
 
