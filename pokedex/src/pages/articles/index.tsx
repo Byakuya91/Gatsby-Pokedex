@@ -29,11 +29,13 @@ const PokeBlogs: React.FC<PokeBlogsProps> = ({ data }) => {
     <Layout>
       <HomeTitle>PokeBlogs</HomeTitle>
       {nodes.map(node => (
-        <Article key={node.id}>
-          <Link to={`${node.frontmatter.slug}`}>{node.frontmatter.title}</Link>
-          <p>Posted:{node.frontmatter.date}</p>
-          <p>{node.excerpt}</p>
-        </Article>
+        <Link key={node.id} to={node.frontmatter.slug}>
+          <Article key={node.id}>
+            <h2>{node.frontmatter.title}</h2>
+            <p>Posted:{node.frontmatter.date}</p>
+            <p>{node.excerpt}</p>
+          </Article>
+        </Link>
       ))}
     </Layout>
   )
