@@ -16,7 +16,10 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-image`,
+    `gatsby-plugin-mdx`,
     `gatsby-plugin-styled-components`,
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-omni-font-loader`,
       options: {
@@ -51,8 +54,6 @@ module.exports = {
         path: `${__dirname}/src/articles`,
       },
     }, // Close the second options object here
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
