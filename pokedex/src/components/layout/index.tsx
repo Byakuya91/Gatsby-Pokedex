@@ -19,6 +19,7 @@ const Layout = ({ children }) => {
 
   return (
     <ThemeProvider theme={defaultTheme}>
+      {/* ?Fetching this from the graphQL query */}
       <Header siteTitle={data?.site?.siteMetadata?.title} />
       <Main>{children}</Main>
     </ThemeProvider>

@@ -10,6 +10,7 @@
 exports.createPages = async ({ actions }) => {
   const { createPage } = actions
   createPage({
+    // "dsg refers to 'deferred static generation located in the TEMPLATES folder.'"
     path: "/using-dsg",
     component: require.resolve("./src/templates/using-dsg.js"),
     context: {},
