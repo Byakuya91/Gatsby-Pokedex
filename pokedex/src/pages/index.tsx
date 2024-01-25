@@ -2,9 +2,10 @@ import * as React from "react"
 
 import Layout from "../components/layout"
 import Seo from "../components/seo"
-import { HomeTitle } from "../styles/homepagestyles"
+import { HomeTitle, PokemonGrid } from "../styles/homepagestyles"
 import { graphql } from "gatsby"
 import { AllPokemonType } from "../types/pokemon"
+import PokemonCard from "../components/PokemonCard/pokeIndex"
 
 // TODOs0: Connect to Nintendo API(ONGOING)
 // TODO1: Render out the Pokedex cards(NEEDS TO BE DONE)
@@ -31,11 +32,25 @@ type IndexPageProps = {
 }
 
 const IndexPage: React.FC<IndexPageProps> = ({ data }) => {
-  console.log(data, "homepagedata")
+  //? Checking if the data is coming through on homepage
+  // console.log(data, "homepagedata")
+
+  // ?Key variables for accessing Data
+  const numOfPokemon = data?.allPokemon?.totalCount
+  const allPokemon = data?.allPokemon?.nodes
 
   return (
     <Layout>
       <HomeTitle>Home page</HomeTitle>
+      <p>Number of Pokemon:{numOfPokemon ?? "N/A"}</p>
+      {/* Rendering the Pokemon */}
+      <div>
+        <PokemonGrid>
+          {allPokemon?.map((pokemon, index) => (
+            <PokemonCard key={pokemon.id} index={index} pokemon={pokemon} />
+          ))}
+        </PokemonGrid>
+      </div>
     </Layout>
   )
 }
