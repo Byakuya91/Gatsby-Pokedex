@@ -21,3 +21,16 @@ export const PokemonGrid = styled.div`
     grid-template-columns: repeat(1, 1fr);
   }
 `
+
+// Filter container styles
+export const FilterContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  padding: 2rem;
+  gap: 1rem;
+  border-radius: 20px;
+  max-width: 600px;
+  text-align: center;
+`

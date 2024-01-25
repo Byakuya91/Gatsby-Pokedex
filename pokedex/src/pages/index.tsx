@@ -2,7 +2,11 @@ import * as React from "react"
 
 import Layout from "../components/layout"
 import Seo from "../components/seo"
-import { HomeTitle, PokemonGrid } from "../styles/homepagestyles"
+import {
+  FilterContainer,
+  HomeTitle,
+  PokemonGrid,
+} from "../styles/homepagestyles"
 import { graphql } from "gatsby"
 import { AllPokemonType } from "../types/pokemon"
 import PokemonCard from "../components/PokemonCard/pokeIndex"
@@ -53,16 +57,48 @@ const IndexPage: React.FC<IndexPageProps> = ({ data }) => {
 
   return (
     <Layout>
-      <HomeTitle>Home page</HomeTitle>
-      <p>Number of Pokemon:{numOfPokemon ?? "N/A"}</p>
-      <SearchBar search={search} setSearch={setSearch} />
-      <Dropdown setType={setType} />
+      <FilterContainer>
+        <h1>Pokedex</h1>
+        <p>Total Number Of Pokemon: {numOfPokemon}</p>
+        <p>
+          Search for a Pokemon by name or use the dropdown to select a Pokemon
+          type or use both.
+        </p>
+        <SearchBar search={search} setSearch={setSearch} />
+        <Dropdown setType={setType} />
+      </FilterContainer>
+
       {/* Rendering the Pokemon */}
       <div>
         <PokemonGrid>
-          {allPokemon?.map((pokemon, index) => (
-            <PokemonCard key={pokemon.id} index={index} pokemon={pokemon} />
-          ))}
+          {allPokemon
+            ?.filter(pokemon => {
+              // Check if there is a type and it matches the pokemon's type
+              const hasType = type && pokemon.types.includes(type)
+
+              // Check if there is a search term and it matches the pokemon's name
+              const hasSearch =
+                search &&
+                pokemon.name
+                  .toLocaleLowerCase()
+                  .includes(search.toLocaleLowerCase())
+
+              // Return the pokemon if there is neither type nor search
+              return !type && !search
+                ? pokemon
+                : // If there is a type but no search, return hasType
+                type && !search
+                ? hasType
+                : // If there is no type but a search, return hasSearch
+                !type && search
+                ? hasSearch
+                : // If both type and search exist, return the intersection of hasType and hasSearch
+                  hasType && hasSearch
+            })
+            ?.map((pokemon, index) => (
+              // Map through the filtered pokemon array and render PokemonCard components
+              <PokemonCard key={pokemon.id} index={index} pokemon={pokemon} />
+            ))}
         </PokemonGrid>
       </div>
     </Layout>
