@@ -5,7 +5,7 @@ import { HomeTitle } from "../../styles/homepageStyles"
 import { Link, graphql } from "gatsby"
 import { PokeBlogsProps } from "../../types/articles"
 import { Article } from "../../styles/articlePageStyles"
-
+// ? GraphQL command to render out the articles MDX within the project
 export const query = graphql`
   query PokeBlogs {
     allMdx(sort: { fields: frontmatter___date, order: DESC }) {
@@ -20,10 +20,14 @@ export const query = graphql`
     }
   }
 `
+// ? NOTE: the data is props that's coming from above via "PokeBlogs"
 const PokeBlogs: React.FC<PokeBlogsProps> = ({ data }) => {
   const {
     allMdx: { nodes },
   } = data
+
+  // ? Checking the data for the props that's coming from articles.ts
+  // console.log(data, "data");
 
   return (
     <Layout>

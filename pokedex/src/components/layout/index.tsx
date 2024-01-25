@@ -18,8 +18,9 @@ const Layout = ({ children }) => {
   `)
 
   return (
+    // ?defaultTheme connects to styles folder, index.ts
     <ThemeProvider theme={defaultTheme}>
-      {/* ?Fetching this from the graphQL query */}
+      {/*?Fetching this from the graphQL query */}
       <Header siteTitle={data?.site?.siteMetadata?.title} />
       <Main>{children}</Main>
     </ThemeProvider>
