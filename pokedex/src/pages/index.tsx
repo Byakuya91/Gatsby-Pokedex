@@ -1,5 +1,5 @@
+// ?Other Imports
 import * as React from "react"
-
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 import {
@@ -7,7 +7,11 @@ import {
   HomeTitle,
   PokemonGrid,
 } from "../styles/homepagestyles"
-import { graphql } from "gatsby"
+
+// ? Gatsby imports
+import { Link, graphql } from "gatsby"
+
+//? Component imports
 import { AllPokemonType } from "../types/pokemon"
 import PokemonCard from "../components/PokemonCard/pokeIndex"
 import SearchBar from "../components/SearchBar/pokeSearch"
@@ -96,8 +100,10 @@ const IndexPage: React.FC<IndexPageProps> = ({ data }) => {
                   hasType && hasSearch
             })
             ?.map((pokemon, index) => (
-              // Map through the filtered pokemon array and render PokemonCard components
-              <PokemonCard key={pokemon.id} index={index} pokemon={pokemon} />
+              // Map through the filtered pokemon array and render PokemonCard components and links.
+              <Link to={`/pokemon/${pokemon.name}`} key={pokemon.id}>
+                <PokemonCard index={index} pokemon={pokemon} />
+              </Link>
             ))}
         </PokemonGrid>
       </div>

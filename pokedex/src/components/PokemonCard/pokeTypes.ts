@@ -1,6 +1,6 @@
 export type PokemonCardProps = {
   pokemon: AllPokemonType
-  index: number
+  index?: number
 }
 
 export type AllPokemonType = {
